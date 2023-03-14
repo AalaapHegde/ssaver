@@ -1,0 +1,32 @@
+{% if request.user.is_authenticated %}
+    <p>{{request.user}}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+{%else%}
+<a href="{% url 'login' %}">Login</a>
+{%endif%}    
+
+
+<hr>
+<h1>Ingredient List</h1>
+<a href = "{% url 'ingredient-create'%}">Add ingredient</a>
+<form method = "GET">
+    <input type = 'text' name = 'search-area' value = "{{search_input}}">
+    <input type = "submit" value = "search">
+
+</form>
+
+<table>
+    <tr>
+        <th>Ingredient</th>
+        <th></th>
+    </tr>
+    {% for ingredient in ingredients %}
+    <tr>
+        <td>{{ingredient.ingredientname}}</td>
+        <td><a href="{% url 'ingredient' ingredient.id %}">View</a></td>
+        <td><a href="{% url 'ingredient-delete' ingredient.id %}">Delete</a></td>
+    </tr>
+    {% empty %}
+        <h3>No ingredients in list</h3>
+    {% endfor %}
+</table>

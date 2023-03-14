@@ -1,0 +1,7 @@
+<a href="{% url 'ingredients' %}"></a>
+<form method = "POST"> 
+    {%csrf_token%}
+    <p>Are you sure to delete this ingredient? {{ingredient}}</p>
+    <input value = "Delete" type = "submit"/>
+
+</form>
