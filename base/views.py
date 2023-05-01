@@ -10,6 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
+from .forms import CreateUserForm
+
 
 # Create your views here.
 
@@ -33,7 +35,7 @@ class CustomLoginView(LoginView):
 #if registration works, will be redirected to their ingredient list
 class RegisterPage(FormView):
     template_name = 'base/register.html'
-    form_class = UserCreationForm
+    form_class = CreateUserForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('ingredients')
 
@@ -101,5 +103,9 @@ class DeleteView(LoginRequiredMixin ,DeleteView):
     success_url = reverse_lazy('ingredients')
 
 
+def home_page(request):
+    context_object_name = 'home'
+    template_name = 'base/home.html'
 
-
+    return render(request, 'base/home.html')
+    
