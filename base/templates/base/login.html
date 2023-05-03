@@ -1,25 +1,64 @@
+{% extends 'base/main.html' %}
+
+{% block title %}
+    Login/Signup
+{% endblock title %}
+
 {% block content %}
-<li><a href="{% url 'home' %}" >Home</a></li>
-<div class="header-bar">
-    <h1>Login</h1>
-</div>
+    <main class="main">
+        <form name="loginForm" action="/login/" method="post">
+            {% csrf_token %}
+            <div class="accScreen loginScreen">
+                <div class="topCard">
+                    <div class="left">
+                        {% if next %}
+                            <input type="hidden" name="next" value="{{next}}">
+                        {% endif %}
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" name="username" id="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Log In</button>
+                </div>
+                <div class="bottomCard">
+                    <p>Don’t have an account?</p><a href = "{% url 'register' %}"><button type="button" class="btn">Register</button></a>
+                </div>
+            </div>
+        </form>
+    </main>
+    {% comment %} <div id="login">
+        <form class="form-horizontal" name="loginForm" action="/login/" method="post">
+            {% csrf_token %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{next}}">
+            {% endif %}
+            <div class="control-group">
+                <label class="control-label" for="username">Username:</label>
+                <div class="controls">
+                    <input type="text" name="username" id="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">Password:</label>
+                <div class="controls">
+                    <input type="password" name="password" id="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Login</button>
+                </div>
+            </div>
 
-<div class="card-body">
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input class="button" type="submit" value="Login">
-    </form>
+            <p> Don't have an account?  <a href = "{% url 'register' %}"> <button type="button">Register</button> </a></p>
 
-    <p>Don't have an account already? <a href = "{% url 'register' %}">Register</a></p>
+        </form>
+    </div> {% endcomment %}
 
-    
-</div>
+{% endblock %}
 
-
-
-
-
-
-
-{% endblock content %}

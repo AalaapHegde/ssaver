@@ -9,6 +9,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib import messages
 
 from .forms import CreateUserForm
 
@@ -48,6 +49,7 @@ class RegisterPage(FormView):
     #redirects to home screen (ingredient list)
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
+            messages.success(request, "account created")
             return redirect('ingredients')
         return super(RegisterPage, self).get(*args, **kwargs)
 

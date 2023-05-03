@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title> 
+          {% block title %} ScrapSaver {% endblock title %} 
+      </title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/allstyles.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+   </head>
+   <body class="home">
+        {% block header %}
+        <header class="header">
+            <a href="{% url 'home' %}" class="logo"><img src="{% static 'images/logo.svg' %}" height="" width="" alt="logo"></a>
+            <div>
+                {% if request.user.is_authenticated %}
+                <ul>
+                    <li><a href="{% url 'logout' %}" >Logout</a></li>
+                </ul>  
+                <ul>
+                    <li><a href="{% url 'ingredients' %}" >Ingredient List</a></li>
+                </ul>
+                {%else%}
+                <ul>
+                    <li><a href="{% url 'login' %}" >Login/Sign up</a></li>
+                </ul> 
+                {%endif%} 
+                
+                                
+            </div>
+        </header>
+        {% endblock header %}
+        {% block content %}
+        
+        {% endblock content %}
+      <script type="text/javascript " src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/plugins.js'%}"></script>
+      <script src="{% static 'js/system.js' %}"></script>
+   </body>
+</html>
+{% comment %} <!DOCTYPE html>
+<html>
+    <head>
+        <title>ScrapSaver</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: "Lato", sans-serif;
+            }
+
+            .w3-bar,
+            h1,
+            button {
+                font-family: "Montserrat", sans-serif;
+            }
+
+            .fa-anchor,
+            .fa-coffee {
+                font-size: 200px;
+            }
+
+            h2 {
+                display: inline;
+            }
+
+            .mission {
+                border-style: solid;
+                border-width: 50px;
+                border-color: #b1b0bc;
+                border-radius: 10%;
+            }
+
+            .inspiration {
+                border-style: solid;
+                border-width: 40px;
+                border-color: white;
+                border-radius: 10%;
+            }
+
+            /* .donate {
+                border-style: solid;
+                border-width: 40px;
+                border-color: green;
+                border-radius: 10%;
+            } */
+
+            .background {
+                background-color: #b1b0bc;
+            }
+            .container{
+                margin-top: 50px;
+            }
+            .first-smaller{
+                font-size: 20px;
+            }
+
+            @media screen and (max-width: 600px) {
+                .first-smaller{
+                    font-size: 10px;
+                }
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+        <div class="w3-top">
+        <div class="w3-bar w3-black w3-card w3-left-align w3-large w3-green">
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-small w3-hover-white w3-large w3-green"
+                href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i
+                    class="fa fa-bars"></i></a>
+                    
+            <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right">Home</a>
+            <img src="images/logo.png" class="logo"
+                    width="75%" height="75%"></a>
+            <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right ">Sign
+                up/Login</a>
+            <a href="{% url 'ingredients' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right ">Ingredient List</a>
+            
+            <!-- <a href="#"
+                class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right ">Contact</a> -->
+            <!-- <a href="{% url 'about' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right ">About
+                us</a>
+            <a href="{% url 'donate' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right ">Donate</a> -->
+        </div>
+
+        <!-- Navbar on small screens -->
+        <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+            <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-padding-large">Home</a>
+            <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large">Sign up/Login</a>
+            <!-- <a href="#" class="w3-bar-item w3-button w3-padding-large">Contact Us</a> -->
+            <!-- <a href="{% url 'about' %}" class="w3-bar-item w3-button w3-padding-large">About Us</a>
+            <a href="{% url 'donate' %}" class="w3-bar-item w3-button w3-padding-large">Donate</a> -->
+        </div>
+    </div>
+
+
+        <div class="container">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+        
+        <script>
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function myFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+    </script>
+    </body>
+
+
+</html> {% endcomment %}
